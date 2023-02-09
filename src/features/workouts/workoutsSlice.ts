@@ -8,7 +8,7 @@ export interface WorkoutsState {
     currentRoutine:string|null;
     currentExercise:string|null;
     currentSet:number|null;
-    currentWorkoutSet: WorkoutSet|null;
+    currentSetData: WorkoutSet|null;
     status: 'idle' | 'loading' | 'failed';
 }
 
@@ -17,7 +17,7 @@ const initialState: WorkoutsState = {
     currentRoutine:null,
     currentExercise:null,
     currentSet:null,
-    currentWorkoutSet:null,
+    currentSetData:null,
     status: 'idle',
 };
 
@@ -61,7 +61,7 @@ export const workoutsSlice = createSlice({
         setCurrentSet:(state:WorkoutsState, action:PayloadAction<number>)=>{
             if(state.workouts){
                 state.currentSet = action.payload;            
-                state.currentWorkoutSet = state.workouts[state.currentRoutine||''][state.currentExercise||''].sets[state.currentSet];
+                state.currentSetData = state.workouts[state.currentRoutine||''][state.currentExercise||''].sets[state.currentSet];
             }
         },
     },
