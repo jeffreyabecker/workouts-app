@@ -29,7 +29,15 @@ const initialState: WorkoutsState = {
 // typically used to make async requests.
 export const fetchWorkoutsAsync = createAsyncThunk(
     'workouts/fetchWorkouts',
-    () => WorkoutsClient.getWorkouts()
+    async () =>{
+        let permission = Notification.permission;
+        if(permission !== 'granted'){
+            permission = await Notification.requestPermission();
+        }        
+        if(permission === 'granted'){
+            WorkoutsClient.getWorkouts();
+        }
+    }
 );
 
 
